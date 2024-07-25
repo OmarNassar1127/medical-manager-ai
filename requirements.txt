@@ -10,3 +10,4 @@ packaging
 filelock
 huggingface-hub
 fsspec
+python-docx
