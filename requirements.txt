@@ -1,0 +1,12 @@
+transformers==4.43.2
+torch
+tqdm
+regex
+safetensors
+tokenizers
+requests
+numpy
+packaging
+filelock
+huggingface-hub
+fsspec
