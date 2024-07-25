@@ -28,8 +28,13 @@ def update_documents(conclusions, output_folder, session_memory):
         raise
 
     try:
-        # Copy previous versions of documents to the new folder
+        # Check if previous_versions folder exists, create if it doesn't
         previous_versions_folder = "previous_versions"
+        if not os.path.exists(previous_versions_folder):
+            os.makedirs(previous_versions_folder)
+            logging.info(f"Created previous versions folder: {previous_versions_folder}")
+
+        # Copy previous versions of documents to the new folder
         for filename in os.listdir(previous_versions_folder):
             src = os.path.join(previous_versions_folder, filename)
             dst = os.path.join(output_folder, filename)
@@ -37,7 +42,7 @@ def update_documents(conclusions, output_folder, session_memory):
             logging.info(f"Copied file: {src} to {dst}")
         session_memory.add_interaction({"action": "copy_previous_versions", "source": previous_versions_folder, "destination": output_folder})
     except (OSError, shutil.Error) as e:
-        logging.error(f"Error copying previous versions: {e}")
+        logging.error(f"Error handling previous versions: {e}")
         raise
 
     try:
