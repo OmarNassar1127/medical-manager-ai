@@ -1,2 +1,4 @@
 # Ignore virtual environment directory
 venv/
+__pycache__/
+test_medical_report.docx
