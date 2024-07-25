@@ -1,12 +1,16 @@
 import random
+from session_memory import SessionMemory
 
-def train_ai(conclusions):
+def train_ai(conclusions, session_memory: SessionMemory):
     """
     Trains the AI with the new data and implements a RAG status system.
     
     Args:
         conclusions (dict): Extracted conclusions from the PMCF report.
+        session_memory (SessionMemory): Instance of SessionMemory to log interactions.
     """
+    session_memory.add_interaction({"action": "train_ai", "input": conclusions})
+    
     # Simulate training process
     print("Training AI with new data...")
     for key, value in conclusions.items():
@@ -27,5 +31,7 @@ def train_ai(conclusions):
     print("RAG Status for conclusions:")
     for key, status in rag_status.items():
         print(f"{key}: {status}")
+    
+    session_memory.add_interaction({"action": "train_ai", "output": rag_status})
 
     return rag_status
