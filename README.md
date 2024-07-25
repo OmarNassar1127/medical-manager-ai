@@ -43,6 +43,45 @@ Medical Manager AI is an AI-powered tool designed to read PMCF (Post-Market Clin
    ```
    Replace `<path_to_pmcf_report>` with the path to your PMCF report file and `<output_folder>` with the path to the folder where you want the updated documents to be saved.
 
+## How to Use the AI Tool
+
+1. **Start the AI Tool:**
+   Run the `main.py` script to start the AI tool. The AI will greet you with a simple message and prompt you to choose an action.
+
+   ```bash
+   python src/main.py
+   ```
+
+2. **Interact with the AI:**
+   The AI will start with a greeting: "Hello! What can I help you with today?" and provide you with options to choose from.
+
+   - **Option 1:** Process a PMCF report
+   - **Option 2:** Exit
+
+   Enter the number corresponding to your choice.
+
+3. **Provide the Path to the PMCF Report:**
+   If you choose to process a PMCF report, the AI will ask you to provide the path to the PMCF report and the path to the output folder for the updated documents.
+
+   ```plaintext
+   Please provide the path to the PMCF report: [your_pmcf_report_path]
+   Please provide the path to the output folder for updated documents: [your_output_folder_path]
+   ```
+
+4. **AI Processing:**
+   The AI will read the PMCF report, update the documents based on the report conclusions, and train itself with the new data. You will be notified once the process is complete.
+
+   ```plaintext
+   The documents have been updated and the AI has been trained with the new data.
+   ```
+
+5. **Exit:**
+   If you choose to exit, the AI will say goodbye and terminate the program.
+
+   ```plaintext
+   Goodbye!
+   ```
+
 ## Model Setup and Training
 
 The AI model uses the Hugging Face Transformers library. To set up and train the model:
