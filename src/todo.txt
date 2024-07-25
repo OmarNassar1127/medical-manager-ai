@@ -1,0 +1,5 @@
+- [x] main.py
+- [x] document_updater.py
+- [x] model_integration.py
+- [x] report_reader.py
+- [x] self_trainer.py
