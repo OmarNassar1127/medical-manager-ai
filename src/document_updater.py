@@ -14,8 +14,15 @@ def update_documents(conclusions, output_folder, session_memory):
         conclusions (dict): Extracted conclusions from the PMCF report.
         output_folder (str): Path to the output folder for updated documents.
         session_memory (SessionMemory): Instance of SessionMemory to track interactions.
+
+    Raises:
+        NotADirectoryError: If the output_folder is not a directory.
     """
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+    if not os.path.isdir(output_folder):
+        logging.error(f"Error: {output_folder} is not a directory")
+        raise NotADirectoryError(f"{output_folder} is not a directory")
 
     try:
         # Create a new folder for the updated documents
