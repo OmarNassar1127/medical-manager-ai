@@ -1,4 +1,5 @@
 import json
+from docx import Document
 from session_memory import SessionMemory
 
 def read_pmcf_report(report_path, session_memory: SessionMemory):
@@ -14,11 +15,17 @@ def read_pmcf_report(report_path, session_memory: SessionMemory):
     """
     session_memory.add_interaction({"action": "read_pmcf_report", "input": report_path})
     
-    with open(report_path, 'r') as file:
-        report_data = json.load(file)
-    
-    # Extract conclusions from the report data
-    conclusions = report_data.get('conclusions', {})
+    if report_path.endswith('.json'):
+        with open(report_path, 'r') as file:
+            report_data = json.load(file)
+        conclusions = report_data.get('conclusions', {})
+    elif report_path.endswith('.docx'):
+        document = Document(report_path)
+        report_text = "\n".join([para.text for para in document.paragraphs])
+        # Placeholder for actual extraction logic from DOCX text
+        conclusions = {"conclusions": report_text}
+    else:
+        raise ValueError("Unsupported file format. Please provide a .json or .docx file.")
     
     session_memory.add_interaction({"action": "read_pmcf_report", "output": conclusions})
     

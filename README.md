@@ -4,10 +4,11 @@ Medical Manager AI is an AI-powered tool designed to read PMCF (Post-Market Clin
 
 ## Features
 
-- Reads and analyzes PMCF reports
+- Reads and analyzes PMCF reports in both JSON and DOCX formats
 - Updates existing medical documents based on new information
 - Self-training capability to improve performance over time
 - RAG (Red, Amber, Green) status system for flagging sections with low confidence
+- Conversational AI interaction for user-friendly experience
 
 ## Prerequisites
 
@@ -33,54 +34,46 @@ Medical Manager AI is an AI-powered tool designed to read PMCF (Post-Market Clin
    pip install -r requirements.txt
    ```
 
-## Usage
+## Interacting with the AI
 
-1. Prepare your PMCF report in JSON format. Ensure that the report includes a `conclusions` section.
-
-2. Run the tool with the following command:
-   ```bash
-   python src/main.py <path_to_pmcf_report> <output_folder>
-   ```
-   Replace `<path_to_pmcf_report>` with the path to your PMCF report file and `<output_folder>` with the path to the folder where you want the updated documents to be saved.
-
-## How to Use the AI Tool
+The Medical Manager AI now supports a conversational interface and can process DOCX files directly for PMCF reports. Here's how to interact with the AI:
 
 1. **Start the AI Tool:**
-   Run the `main.py` script to start the AI tool. The AI will greet you with a simple message and prompt you to choose an action.
-
+   Run the `main.py` script to start the AI tool:
    ```bash
    python src/main.py
    ```
 
-2. **Interact with the AI:**
-   The AI will start with a greeting: "Hello! What can I help you with today?" and provide you with options to choose from.
+2. **Greet the AI:**
+   The AI will greet you with: "Hello! What can I help you with today?"
 
+3. **Choose an Action:**
+   The AI will provide you with options:
    - **Option 1:** Process a PMCF report
    - **Option 2:** Exit
-
    Enter the number corresponding to your choice.
 
-3. **Provide the Path to the PMCF Report:**
-   If you choose to process a PMCF report, the AI will ask you to provide the path to the PMCF report and the path to the output folder for the updated documents.
-
+4. **Provide the PMCF Report:**
+   If you choose to process a PMCF report, the AI will ask for the file path:
    ```plaintext
    Please provide the path to the PMCF report: [your_pmcf_report_path]
+   ```
+   You can now provide the path to either a JSON or DOCX file.
+
+5. **Specify Output Folder:**
+   Next, provide the path for the output folder:
+   ```plaintext
    Please provide the path to the output folder for updated documents: [your_output_folder_path]
    ```
 
-4. **AI Processing:**
-   The AI will read the PMCF report, update the documents based on the report conclusions, and train itself with the new data. You will be notified once the process is complete.
-
+6. **AI Processing:**
+   The AI will process the PMCF report, update the documents, and train itself. You'll be notified once complete:
    ```plaintext
    The documents have been updated and the AI has been trained with the new data.
    ```
 
-5. **Exit:**
+7. **Exit:**
    If you choose to exit, the AI will say goodbye and terminate the program.
-
-   ```plaintext
-   Goodbye!
-   ```
 
 ## Model Setup and Training
 
@@ -90,7 +83,7 @@ The AI model uses the Hugging Face Transformers library. To set up and train the
 
 2. Prepare your training data:
    - Create a directory named `training_data` in the project root.
-   - Add your PMCF reports and corresponding updated documents to this directory.
+   - Add your PMCF reports (JSON or DOCX) and corresponding updated documents to this directory.
 
 3. Run the training script:
    ```bash
