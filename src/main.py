@@ -6,6 +6,26 @@ from self_trainer import train_ai
 from session_memory import SessionMemory  # Import the SessionMemory class
 from file_picker import file_picker  # Import the file_picker function
 
+def validate_medical_document(file_path):
+    medical_keywords = ["Patient", "Diagnosis", "Treatment", "Symptoms", "Medical history", "PMCF report"]
+    keyword_count = 0
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read().lower()
+            for keyword in medical_keywords:
+                if keyword.lower() in content:
+                    keyword_count += 1
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return False
+
+    if keyword_count >= 3:
+        return True
+    else:
+        print("I cannot work with this document because it's not a medical document. Please provide a valid medical report.")
+        return False
+
 def main():
     session_memory = SessionMemory()  # Instantiate SessionMemory
 
@@ -19,6 +39,9 @@ def main():
         pmcf_report_path = file_picker()
         if not pmcf_report_path:
             print("No file selected. Exiting.")
+            return
+
+        if not validate_medical_document(pmcf_report_path):
             return
 
         print("Please select the output folder for updated documents:")
