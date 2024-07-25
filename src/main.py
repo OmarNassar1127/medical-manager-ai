@@ -4,6 +4,7 @@ from report_reader import read_pmcf_report
 from document_updater import update_documents
 from self_trainer import train_ai
 from session_memory import SessionMemory  # Import the SessionMemory class
+from file_picker import file_picker  # Import the file_picker function
 
 def main():
     session_memory = SessionMemory()  # Instantiate SessionMemory
@@ -14,8 +15,17 @@ def main():
     choice = input("Please enter the number of your choice: ")
 
     if choice == "1":
-        pmcf_report_path = input("Please provide the path to the PMCF report: ")
-        output_folder_path = input("Please provide the path to the output folder for updated documents: ")
+        print("Please select the PMCF report file:")
+        pmcf_report_path = file_picker()
+        if not pmcf_report_path:
+            print("No file selected. Exiting.")
+            return
+
+        print("Please select the output folder for updated documents:")
+        output_folder_path = file_picker()
+        if not output_folder_path:
+            print("No folder selected. Exiting.")
+            return
 
         # Read the PMCF report
         conclusions = read_pmcf_report(pmcf_report_path, session_memory)
