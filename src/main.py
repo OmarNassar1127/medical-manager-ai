@@ -5,17 +5,22 @@ from document_updater import update_documents
 from self_trainer import train_ai
 from session_memory import SessionMemory  # Import the SessionMemory class
 from file_picker import file_picker  # Import the file_picker function
+from docx import Document  # Import Document from python-docx
 
 def validate_medical_document(file_path):
     medical_keywords = ["Patient", "Diagnosis", "Treatment", "Symptoms", "Medical history", "PMCF report"]
     keyword_count = 0
 
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            content = file.read().lower()
-            for keyword in medical_keywords:
-                if keyword.lower() in content:
-                    keyword_count += 1
+        doc = Document(file_path)
+        full_text = []
+        for para in doc.paragraphs:
+            full_text.append(para.text)
+        content = ' '.join(full_text).lower()
+
+        for keyword in medical_keywords:
+            if keyword.lower() in content:
+                keyword_count += 1
     except Exception as e:
         print(f"Error reading file: {e}")
         return False
@@ -41,7 +46,10 @@ def main():
             print("No file selected. Exiting.")
             return
 
-        if not validate_medical_document(pmcf_report_path):
+        if validate_medical_document(pmcf_report_path):
+            print("The selected document is a valid medical report. Proceeding with processing.")
+        else:
+            print("The selected document is not a valid medical report. Please choose a different file.")
             return
 
         print("Please select the output folder for updated documents:")
