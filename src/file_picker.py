@@ -1,6 +1,8 @@
 import os
 
-def file_picker(start_path="."):
+def file_picker(start_path=None):
+    if start_path is None:
+        start_path = os.path.expanduser("~")  # Start at the user's home directory by default
     current_path = start_path
     while True:
         print(f"\nCurrent Directory: {current_path}")
