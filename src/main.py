@@ -1,5 +1,6 @@
 import argparse
 import time  # Import the time module
+import json  # Import json module for handling JSON files
 from report_reader import read_pmcf_report
 from document_updater import update_documents
 from self_trainer import train_ai
@@ -12,11 +13,17 @@ def validate_medical_document(file_path):
     keyword_count = 0
 
     try:
-        doc = Document(file_path)
-        full_text = []
-        for para in doc.paragraphs:
-            full_text.append(para.text)
-        content = ' '.join(full_text).lower()
+        if file_path.lower().endswith('.docx'):
+            doc = Document(file_path)
+            full_text = [para.text for para in doc.paragraphs]
+            content = ' '.join(full_text).lower()
+        elif file_path.lower().endswith('.json'):
+            with open(file_path, 'r') as file:
+                content = json.load(file)
+            content = json.dumps(content).lower()
+        else:
+            print("Unsupported file format. Please provide a .docx or .json file.")
+            return False
 
         for keyword in medical_keywords:
             if keyword.lower() in content:
