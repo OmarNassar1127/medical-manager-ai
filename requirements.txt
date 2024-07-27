@@ -11,3 +11,4 @@ filelock
 huggingface-hub
 fsspec
 python-docx
+docx

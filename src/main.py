@@ -9,7 +9,7 @@ from file_picker import file_picker  # Import the file_picker function
 from docx import Document  # Import Document from python-docx
 
 def validate_medical_document(file_path):
-    medical_keywords = ["Patient", "Diagnosis", "Treatment", "Symptoms", "Medical history", "PMCF report"]
+    medical_keywords = ["Patient", "Diagnosis", "Treatment", "Symptoms", "Medical history", "PMCF", "Clinical Evaluation Plan", "PMCF Plan"]
     keyword_count = 0
 
     try:
